@@ -4,24 +4,38 @@ url = 'https://api.coinmarketcap.com/v1/ticker/'
 data = requests.get(url).json()
 
 
-def crypto_report():
-    for currency in data:
-        rank = currency.get('rank')
-        name = currency.get('name')
-        price_usd = currency.get('price_usd')
-        market_cap_usd = currency.get('market_cap_usd')
-        # split_market_cap = ' '.join(market_cap_usd[i:i+3] for i in range(0, len(market_cap_usd), 3))
+def top_increase():
+    ordered_top_3_increase = sorted(data, key=lambda k: float(k['percent_change_24h']))[
+                             97:]
+    print('Top 3 increase in the last 24 hours: ')
+    print(format('RANK', '>4') + ' | ' + format('NAME', '>18') + ' | '
+          + format('CHANGE(24H)', '>8') + ' | ' + format('PRICE(USD)', '>8'))
+    for currency in ordered_top_3_increase:
+        rank = currency['rank']
+        name = currency['name']
+        percent_change = currency['percent_change_24h']
+        price_usd = float(currency['price_usd'])
+        print(format(rank, '>4') + ' | ' + format(name, '>18') + ' | ' + format(
+            percent_change, '>10') + '%' + ' | ' + '$' + format(f'{price_usd:.2f}', '>8'))
+    print()
 
-        try:
-            change_24h = currency.get('percent_change_24h')
-        except Exception as e:
-            change_24h = None
-        if change_24h is not None:
-            currency_breakdown = (rank + ' | ' + name + ' | ' + '$' + price_usd + ' | ' + '$' 
-                                  + market_cap_usd + ' | ' + change_24h + '%')
-            print(currency_breakdown)
-        else:
-            pass
-       
-    
-crypto_report()
+
+top_increase()
+
+
+def top_decrease():
+    ordered_top_3_decrease = sorted(data, key=lambda k: float(k['percent_change_24h']),
+                                    reverse=True)[97:]
+    print('Top 3 decrease in the last 24 hours: ')
+    print(format('RANK', '>4') + ' | ' + format('NAME', '>18') + ' | ' + format(
+        'CHANGE(24H)', '>8') + ' | ' + format('PRICE(USD)', '>8'))
+    for currency in ordered_top_3_decrease:
+        rank = currency['rank']
+        name = currency['name']
+        percent_change = currency['percent_change_24h']
+        price_usd = float(currency['price_usd'])
+        print(format(rank, '>4') + ' | ' + format(name, '>18') + ' | ' + format(
+            percent_change, '>10') + '%' + ' | ' + '$' + format(f'{price_usd:.2f}', '>8'))
+
+
+top_decrease()
