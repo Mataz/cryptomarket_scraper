@@ -18,6 +18,7 @@ def top_increase():
         percent_change_24h = currency['percent_change_24h']
         percent_change_7d = currency['percent_change_7d']
         price_usd = float(currency['price_usd'])
+        price_usd = f'{price_usd:.2f}'
 
         raw_data_increase.setdefault('Rank', [])
         raw_data_increase['Rank'].append(rank)
@@ -63,6 +64,7 @@ def top_decrease():
         percent_change = currency['percent_change_24h']
         percent_change_7d = currency['percent_change_7d']
         price_usd = float(currency['price_usd'])
+        price_usd = f'{price_usd:.2f}'
         
         raw_data_decrease.setdefault('Rank', [])
         raw_data_decrease['Rank'].append(rank)
