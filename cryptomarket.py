@@ -1,11 +1,14 @@
 import requests
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from pandas.tools.plotting import table
 
 url = 'https://api.coinmarketcap.com/v1/ticker/'
 data = requests.get(url).json()
-
+if not os.path.exists('df_image'):
+    os.makedirs('df_image')
+os.chdir('df_image')
 
 def top_increase():
     ordered_data = sorted(data, key=lambda 
