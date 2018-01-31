@@ -53,7 +53,7 @@ def top_increase():
     # set scale
     tab.scale(1, 1.8)
     # save the result
-    plt.savefig('coincappinc.png')
+    plt.savefig('coincapinc.png')
 
 
 top_increase()
