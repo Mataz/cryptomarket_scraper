@@ -1,5 +1,6 @@
 import requests
 import os
+import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 from pandas.tools.plotting import table
@@ -106,5 +107,19 @@ def top_decrease():
 top_decrease()
 
 
+def btc_chg():
+    btc_url = 'http://coincap.io/history/30day/BTC'
+    btc_data = requests.get(btc_url).json()
+
+    for values in btc_data['price']:
+        time = values[0]
+        time = int(str(time)[:10])
+        converted_time = datetime.datetime.utcfromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S')
+
+        print(converted_time + ' ' + str(values[1]))
+
+
+
+btc_chg()
 
 
