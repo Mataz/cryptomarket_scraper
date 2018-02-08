@@ -110,15 +110,34 @@ top_decrease()
 def btc_chg():
     btc_url = 'http://coincap.io/history/30day/BTC'
     btc_data = requests.get(btc_url).json()
-
+    price_list = []
+    time_list = []
+    df_price = {}
+    
     for values in btc_data['price']:
         time = values[0]
         time = int(str(time)[:10])
         converted_time = datetime.datetime.utcfromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S')
 
-        print(converted_time + ' ' + str(values[1]))
+#         print(converted_time + ' ' + str(values[1]))
+        
+        df_price.setdefault('Datetime', [])
+        df_price['Datetime'].append(converted_time)
+        df_price.setdefault('Price', [])
+        df_price['Price'].append(str(values[1]))
 
+        df = pd.DataFrame(df_price, columns=['Datetime', 'Price'])
 
+        price_list.append(str(values[1]))
+        time_list.append(converted_time)
+    
+    print(df.to_string())
+
+    # TODO : clean up ticklabels
+    fig, ax = plt.subplots()
+    ax.plot(time_list, price_list)
+    
+    plt.show(ax)
 
 btc_chg()
 
