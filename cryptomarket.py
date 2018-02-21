@@ -136,6 +136,9 @@ def btc_chg():
     df.to_csv('btc_30d_chg.csv')
     graph = pd.read_csv('btc_30d_chg.csv', parse_dates=True, index_col=1)
     graph['Price'].plot()
+    plt.xlabel('Date')
+    plt.ylabel('Price')
+    plt.title('Bitcoin changes (30d)')
     plt.savefig('btc_chg.png')
 
 btc_chg()
