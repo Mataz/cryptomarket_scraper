@@ -13,4 +13,4 @@ ___
 ___
 
 #### 30 days changes for Bitcoin: 
-![30dChg](https://github.com/Mataz/cryptomarket_scraper/blob/master/images/btc_chg.png)
+![30dChg](https://github.com/Mataz/cryptomarket_scraper/blob/master/images/btc_changes.png)
