@@ -132,12 +132,11 @@ def btc_chg():
         time_list.append(converted_time)
     
     print(df.to_string())
-
-    # TODO : clean up ticklabels
-    fig, ax = plt.subplots()
-    ax.plot(time_list, price_list)
     
-    plt.show(ax)
+    df.to_csv('btc_30d_chg.csv')
+    graph = pd.read_csv('btc_30d_chg.csv', parse_dates=True, index_col=1)
+    graph['Price'].plot()
+    plt.savefig('btc_chg.png')
 
 btc_chg()
 
