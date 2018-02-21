@@ -139,7 +139,7 @@ def btc_chg():
     plt.xlabel('Date')
     plt.ylabel('Price')
     plt.title('Bitcoin changes (30d)')
-    plt.savefig('btc_chg.png')
+    plt.savefig('btc_changes.png')
 
 btc_chg()
 
